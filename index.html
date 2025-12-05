@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E‑Cash | Обмен — Переход</title>
+
+  <!-- Facebook Pixel -->
+  <script>
+    !(function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){
+        n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)
+      };
+      if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '1226647939352755');
+    fbq('track', 'PageView');
+  </script>
+
+  <style>
+    body {
+      margin:0; padding:0;
+      font-family: "Inter", sans-serif;
+      background: radial-gradient(circle at top, #1d2736, #0d1117 70%);
+      color:#fff; display:flex; justify-content:center; align-items:center;
+      height:100vh; text-align:center;
+    }
+    .card {
+      background: rgba(31,42,58,0.7);
+      padding:40px; border-radius:20px;
+      max-width:420px; width:90%;
+      box-shadow:0 0 40px rgba(0,0,0,0.5);
+    }
+    h1 { font-size:26px; margin-bottom:10px; }
+    p { font-size:17px; margin-bottom:20px; opacity:.85; }
+    .btn {
+      display:inline-block; background:linear-gradient(135deg,#27a7e7,#3bc2ff);
+      color:#fff; padding:14px 28px; border-radius:12px;
+      text-decoration:none; font-weight:600; font-size:18px;
+      box-shadow:0 5px 20px rgba(39,167,231,0.45);
+      transition:.25s;
+    }
+    .btn:hover { transform:scale(1.05); }
+    .circle-timer {
+      margin:20px auto 10px;
+      width:100px; height:100px;
+      position:relative;
+    }
+    svg { width:100px; height:100px; }
+    text {
+      font-size:26px;
+      fill:#fff;
+      font-weight:600;
+    }
+    .timer-text {
+      font-size:16px;
+      color:#3bc2ff;
+      font-weight:600;
+      margin-top:8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>E‑Cash | Обмен</h1>
+    <p>Вы переходите в официальный Telegram‑канал</p>
+    <a class="btn" onclick="fbq('track','Lead');" href="https://t.me/+v3TPHWeYi5tmMmM6">Перейти сразу</a>
+
+    <div class="circle-timer">
+      <svg>
+        <circle cx="50" cy="50" r="45" stroke="#444" stroke-width="8" fill="none"/>
+        <circle id="progressCircle" cx="50" cy="50" r="45"
+                stroke="#3bc2ff" stroke-width="8" fill="none"
+                stroke-dasharray="282.6" stroke-dashoffset="282.6"
+                transform="rotate(-90 50 50)"/>
+        <text id="countdownText" x="50%" y="50%" text-anchor="middle" dy=".3em">5</text>
+      </svg>
+    </div>
+    <div class="timer-text">Автопереход через <span id="countdown">5</span> сек.</div>
+  </div>
+
+  <script>
+    let seconds = 5;
+    const countdownEl = document.getElementById("countdown");
+    const countdownText = document.getElementById("countdownText");
+    const circle = document.getElementById("progressCircle");
+    const totalLength = 282.6;
+
+    const interval = setInterval(() => {
+      seconds--;
+      countdownEl.textContent = seconds;
+      countdownText.textContent = seconds;
+      circle.style.strokeDashoffset = totalLength * (seconds / 5);
+
+      if(seconds <= 0){
+        clearInterval(interval);
+        fbq('track','Lead');
+        setTimeout(() => {
+          window.location.href = "https://t.me/+v3TPHWeYi5tmMmM6";
+        }, 500);
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
